@@ -34,23 +34,6 @@ Node* insert(Node *root, int value)
     return root;
 }
 
-// bool search(Node *root, int target)
-// {
-//     if (!root)
-//         return NULL;
-//     if (root->data == target)
-//         return true;
-
-//     if (target < root->data)
-//     {
-//         search(root->left, target);
-//     }
-//     else
-//     {
-//         search(root->right, target);
-//     }
-// }
-
 Node *createThreaded(Node *root)
 {
     if (root == NULL)
