@@ -4,7 +4,7 @@ using namespace std;
 struct Node
 {
   string data;
-  vector<Node *> child;
+  vector<Node *>child;
 };
 
 Node *newNode(string key)
@@ -37,13 +37,14 @@ void createTree()
     cin >> chapter_name;
 
     (root->child).push_back(newNode(chapter_name));
+
     cout << "Enter no. of sections in  Chapter " << root->child[i]->data << " : ";
 
     int number_of_sections;
     cin >> number_of_sections;
+
     for (int j = 0; j < number_of_sections; j++)
     {
-
       cout << "Enter Section " << j + 1 << " name: ";
       string section_name;
       cin >> section_name;
