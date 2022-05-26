@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+//Define a structure
 struct Node
 {
     int data;
@@ -9,6 +10,7 @@ struct Node
     bool isThreaded;    
 };
 
+//Function to make a new node
 Node *newNode(int val)
 {
     Node *temp = new Node;
@@ -17,32 +19,33 @@ Node *newNode(int val)
     return temp;
 }
 
+//insert new node 
 Node* insert(Node *root, int value)
 {
-    if (root==NULL)
+    if (root==NULL)//if root is NULL than make return a new node having the value val
     {
         return newNode(value);
     }
-    else if (value < root->data)
+    else if (value < root->data)//if value is smaller than root->data then we move to the left side of the tree
     {
         root->left=insert(root->left, value);
     }
-    else
+    else////if value is grater than root->data then we move to the right side of the tree
     {
         root->right=insert(root->right, value);
     }
     return root;
 }
 
+//Creatng threads to the tree
 Node *createThreaded(Node *root)
 {
     if (root == NULL)
         return NULL;
-    if (root->left == NULL &&
-        root->right == NULL)
+    if (root->left == NULL && root->right == NULL)//if both left right node is null than we return root
         return root;
  
-    if (root->left != NULL)
+    if (root->left != NULL)//if root left is null than we point it to inorder predecessor 
     {
         Node* l = createThreaded(root->left);
  
@@ -50,12 +53,13 @@ Node *createThreaded(Node *root)
         l->isThreaded = true;
     }
  
-    if (root->right == NULL)
+    if (root->right == NULL)////if root right is null than we point it to inorder successo 
         return root;
  
     return createThreaded(root->right);
 }
  
+//moving left
 Node *leftMost(Node *root)
 {
     while (root != NULL && root->left != NULL)
@@ -63,16 +67,17 @@ Node *leftMost(Node *root)
     return root;
 }
  
+ //inorder traversal
 void inOrder(Node *root)
 {
     if (root == NULL) return;
  
-    Node *cur = leftMost(root);
+    Node *cur = leftMost(root);//move to leftmost node of the root
  
     while (cur != NULL)
     {
         cout << cur->data << " ";
-        if (cur->isThreaded)
+        if (cur->isThreaded)//cheack wheather a node is threaded or not
             cur = cur->right;
  
         else 
